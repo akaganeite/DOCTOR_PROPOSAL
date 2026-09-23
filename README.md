@@ -45,6 +45,6 @@ xelatex Thesis && bibtex Thesis && xelatex Thesis && xelatex Thesis
 
 ## 待办
 
-1. **填写 `Tex/Frontinfo.tex`**：姓名、学号、导师、职称。
+1. ~~填写 `Tex/Frontinfo.tex`~~（已完成：张小北 / 202518018629028 / 侯锐 研究员 / 计算机系统结构）。
 2. **文献核实**：`Biblio/ref.bib` 中标注 `% TODO-VERIFY` 的条目（SyzTrust、Ember-IO、Firmvenom、CONFU、Operation Mango、FIRE、OctopusTaint、UVScan、FirmPilot、CVE-Bench、SEC-bench、RUSPATCH、AkiraRust 等）的 venue/年份为最佳推测，投稿/答辩前务必逐条核对。
-3. **已核实条目**：2.1 节全部 24 篇（源自《PPT的发展现状和综述》文献表）、FirmAgent（NDSS 2026）、LATTE（arXiv:2310.08275）、BinReX（USENIX Security 2026）、本人 ISSTA 2026 empirical 论文。
+3. **已核实条目**：2.3 节（漏洞修复验证）全部 24 篇（源自《PPT的发展现状和综述》文献表）、FirmAgent（NDSS 2026）、LATTE（arXiv:2310.08275）、BinReX（USENIX Security 2026）、本人 ISSTA 2026 empirical 论文。

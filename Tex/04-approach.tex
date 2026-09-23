@@ -1,45 +1,5 @@
 \section{拟采用的研究方法、技术路线、实验方案及其可行性分析}
 
-\subsection{基于智能体的补丁存在性测试方法}
-
-\textbf{拟解决的关键问题}：智能体在端到端补丁存在性测试中的两大瓶颈——\textbf{剥离二进制中的补丁定位}与\textbf{演化补丁识别}。前期实证研究表明，前者占弱模型配置独有失败的 95.2\%，后者是鲁棒性测试的主要失分点~\cite{zhang2026agenticppt}。两者本质上都源于跨抽象层次补丁语义对齐困难、修复意图难以形式化：源码级补丁意图与二进制级指令序列之间存在语义鸿沟，且现有方法过度依赖补丁的形式特征而非修复意图。
-
-\textbf{技术方案}：针对上述问题，本文提出\textbf{语义先验引导的智能体补丁存在性测试增强框架}，整体技术路线如图~\ref{fig:ppt-route} 所示，包含三个核心模块：
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=0.45cm]
-  \node[module] (m1) {%
-    \textbf{模块一：漏洞语义先验提取}（离线，一次/漏洞）\\
-    CVE 描述 + 补丁 diff + 源码上下文 $\xrightarrow{\text{智能体推理}}$\\
-    漏洞语义五元组 $\langle$触发条件, 危险操作, 干预点, 修复意图, 上下文$\rangle$};
-  \node[module, below=of m1] (m2) {%
-    \textbf{模块二：语义引导的补丁定位}（在线，核心创新）\\
-    粗定位：字符串/常量/导入表启发式 $\rightarrow$ 候选函数集\\
-    细定位：五元组约束 + 反汇编切片 $\rightarrow$ Top-K 补丁候选区\\
-    置信度排序：基于语义匹配度的候选排序};
-  \node[module, below=of m2] (m3) {%
-    \textbf{模块三：演化补丁的语义等价判定}（在线，核心创新）\\
-    干预点识别：定位补丁实际修改的二进制指令\\
-    修复意图比对：判断干预是否实现"修复意图"（而非形式匹配）\\
-    不变式检查：验证修复后是否满足语义不变式};
-  \draw[arr] (m1) -- (m2);
-  \draw[arr] (m2) -- (m3);
-\end{tikzpicture}
-\caption{基于智能体的补丁存在性测试技术路线}
-\label{fig:ppt-route}
-\end{figure}
-
-\begin{itemize}
-  \item \textbf{模块一：漏洞语义先验提取}。离线阶段利用智能体从 CVE 描述、补丁 diff 与源码上下文中提取漏洞语义五元组，作为统一语义先验，替代现有方法仅依赖原始补丁 diff 的浅层表示。
-  \item \textbf{模块二：语义引导的补丁定位}。在线阶段采用"粗—细"两阶段定位：先用传统启发式（字符串、常量、导入表）快速缩小候选函数集，再将五元组作为约束注入智能体推理，引导其在候选函数中进行语义切片与置信度排序，输出 Top-K 补丁候选区域。
-  \item \textbf{模块三：演化补丁的语义等价判定}。针对同一漏洞可能存在多种实现形式的修复（重构、拆分、合并等），不再追求"形式上的补丁匹配"，而是让智能体判断目标二进制中的干预点是否\textbf{实现了与原始补丁相同的修复意图}，并通过语义不变式进行交叉验证。
-\end{itemize}
-
-\textbf{可行性分析}：（1）数据基础充分：已构建 561 CVE 高保真基准与 12 组智能体配置的运行日志~\cite{zhang2026pptempirical,zhang2026agenticppt}，包含大量补丁定位与演化补丁的成功/失败案例，可直接用于方法设计与消融验证；（2）技术路线有实证支撑：前期工作已证明"丰富补丁元数据提升 DSR"与"补丁定位是主要瓶颈"两个关键结论，本方案是这两个结论的直接延伸，技术风险低；（3）工具链成熟：智能体框架（Codex / MiniSWEAgent）、二进制分析工具（binutils / Ghidra）与评估基准均已就绪，可快速进入实验迭代。
-
-\textbf{实验方案}：基准沿用前期 561-CVE Source-Built Benchmark + Patch Evolution Set + Ubuntu Packages Set；对比方法包括 Codex 原始配置、Lares~\cite{lares}、PPTSP~\cite{pptsp}、PS\textsuperscript{3}~\cite{ps3}、BinXray~\cite{binxray}；评估指标包括 DSR、Accuracy、补丁定位准确率、每例 token 成本与时延；消融实验分别验证三个模块的独立贡献。预期全配置 DSR $\geq$ 0.98，演化补丁子集 DSR 提升 $\geq$ 15\%，成本增加 $\leq$ 10\%。
-
 \subsection{基于智能体的语义漏洞挖掘方法}
 
 \textbf{拟解决的关键问题}：语义/逻辑漏洞（认证绕过、状态机错误、配置驱动缺陷）自动化挖掘的两大瓶颈——\textbf{自因变量难以统一建模}与\textbf{语义 oracle 难以自动构造}。自因变量——那些不受外部输入直接控制、由内部状态、配置、时序与外设决定的变量——在文献中以 state-driven、config-driven、timing-driven、peripheral-driven 等不同形态各自为战，缺乏统一抽象；同时，语义漏洞的判定依赖人工构造的策略与规约，Firmalice 的认证绕过 oracle 使用十年仍是孤例~\cite{firmalice}，oracle 的缺失使自动化检测难以规模化。
@@ -94,7 +54,7 @@
 \centering
 \begin{tikzpicture}[node distance=0.45cm]
   \node[module] (m1) {%
-    \textbf{模块一：漏洞根因语义理解}（复用内容一能力）\\
+    \textbf{模块一：漏洞根因语义理解}（复用内容一与三的语义能力）\\
     漏洞报告 + PoC + 相关源码 $\xrightarrow{\text{智能体推理（复用漏洞语义五元组）}}$\\
     根因语义表示 $\langle$触发条件, 危险操作, 应有不变式$\rangle$};
   \node[module, below=of m1] (m2) {%
@@ -107,7 +67,7 @@
     编译 / 公开测试 / 静态检查反馈 $\rightarrow$ 多轮迭代修正};
   \node[module, below=of m3] (m4) {%
     \textbf{模块四：PPT 式修复验证}（核心创新）\\
-    补丁语义判定：复用内容一"修复意图判定"，验证补丁是否实现应有不变式\\
+    补丁语义判定：复用内容三"修复意图判定"，验证补丁是否实现应有不变式\\
     差分测试：构造接近 PoC 但语义不同的输入，检测过拟合\\
     回归检查：验证合法行为保持};
   \draw[arr] (m1) -- (m2);
@@ -120,15 +80,55 @@
 \end{figure}
 
 \begin{itemize}
-  \item \textbf{模块一：漏洞根因语义理解}。直接复用研究内容一的漏洞语义五元组提取能力，将漏洞报告与 PoC 转化为结构化的根因语义表示，为后续修复提供深层理解基础。
+  \item \textbf{模块一：漏洞根因语义理解}。依托统一的漏洞语义五元组表示（与研究内容三共享），将漏洞报告与 PoC 转化为结构化的根因语义表示，为后续修复提供深层理解基础。
   \item \textbf{模块二：安全性质规约自动提取}。这是连接 PPT 与修复的关键创新。借鉴 RRBench 私有 Oracle 的设计思想，但将其从"人工构造"扩展为"智能体自动生成"：智能体基于漏洞语义与代码上下文，自动提取补丁必须满足的安全性质集合。这些规约既可指导补丁生成，也可作为最终验证依据。
   \item \textbf{模块三：规约引导的补丁生成}。修复智能体在根因语义与安全规约的双重引导下生成候选补丁，并通过编译、公开测试与静态检查进行多轮迭代。
   \item \textbf{模块四：PPT 式修复验证}。这是本研究内容的核心创新，将 PPT 能力对偶迁移到修复验证：通过\textbf{补丁语义判定}（验证候选补丁是否真正实现应有不变式）、\textbf{差分测试}（自动构造与 PoC 语义相近但不同的输入以检测过拟合）、\textbf{回归检查}（验证合法功能保持）三重机制，系统性抑制过拟合补丁与合法功能回归。
 \end{itemize}
 
-\textbf{可行性分析}：（1）直接基于 RRBench：基准、评估框架、五款基线 agent 数据均已就绪，可快速开展对比实验，与课题组前期工作延续性强~\cite{rrbench}；（2）PPT 能力可迁移：内容一的"修复意图判定"与本内容的"补丁语义判定"本质同源，技术路线已形成闭环，风险分散；（3）规约自动提取有先例：ChatAFL 的协议规约提取、Firmalice 的特权模型等已证明 LLM 具备规约理解能力~\cite{chatafl,firmalice}；（4）工程基础成熟：SWE-agent~\cite{sweagent}、OpenHands~\cite{openhands} 等开源框架提供了成熟的修复智能体底座。
+\textbf{可行性分析}：（1）直接基于 RRBench：基准、评估框架、五款基线 agent 数据均已就绪，可快速开展对比实验，与课题组前期工作延续性强~\cite{rrbench}；（2）PPT 能力可迁移：研究内容三的"修复意图判定"与本内容的补丁验证需求本质同源，技术路线已形成闭环，风险分散；（3）规约自动提取有先例：ChatAFL 的协议规约提取、Firmalice 的特权模型等已证明 LLM 具备规约理解能力~\cite{chatafl,firmalice}；（4）工程基础成熟：SWE-agent~\cite{sweagent}、OpenHands~\cite{openhands} 等开源框架提供了成熟的修复智能体底座。
 
 \textbf{实验方案}：基准采用 RRBench 全部 115 个案例，后续扩展至 SEC-bench~\cite{secbench}、CVE-Bench~\cite{cvebench} 子集；对比方法包括 SWE-agent~\cite{sweagent}、OpenHands~\cite{openhands}、RepairAgent~\cite{repairagent}、RustAgent、RustForger（即 RRBench 原五款）；评估指标包括 Correct Repair Rate（通过公开+私有验证）、Plausible-but-Private-Rejected Rate、平均迭代轮数、每例成本；消融实验分别验证安全规约引导、PPT 式验证与差分测试的独立贡献。预期 Correct Repair Rate $\geq$ 80\%，私有拒绝率降低 $\geq$ 50\%，在 14 个"无人能修"案例上成功修复 $\geq$ 4 个。
+
+\subsection{基于智能体的漏洞修复验证方法}
+
+\textbf{拟解决的关键问题}：智能体在端到端漏洞修复验证（以补丁存在性测试为核心任务）中的两大瓶颈——\textbf{剥离二进制中的补丁定位}与\textbf{演化补丁识别}。前期实证研究表明，前者占弱模型配置独有失败的 95.2\%，后者是鲁棒性测试的主要失分点~\cite{zhang2026agenticppt}。两者本质上都源于跨抽象层次补丁语义对齐困难、修复意图难以形式化：源码级补丁意图与二进制级指令序列之间存在语义鸿沟，且现有方法过度依赖补丁的形式特征而非修复意图。
+
+\textbf{技术方案}：针对上述问题，本文提出\textbf{语义先验引导的智能体修复验证增强框架}，整体技术路线如图~\ref{fig:verify-route} 所示，包含三个核心模块：
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=0.45cm]
+  \node[module] (m1) {%
+    \textbf{模块一：漏洞语义先验提取}（离线，一次/漏洞）\\
+    CVE 描述 + 补丁 diff + 源码上下文 $\xrightarrow{\text{智能体推理}}$\\
+    漏洞语义五元组 $\langle$触发条件, 危险操作, 干预点, 修复意图, 上下文$\rangle$};
+  \node[module, below=of m1] (m2) {%
+    \textbf{模块二：语义引导的补丁定位}（在线，核心创新）\\
+    粗定位：字符串/常量/导入表启发式 $\rightarrow$ 候选函数集\\
+    细定位：五元组约束 + 反汇编切片 $\rightarrow$ Top-K 补丁候选区\\
+    置信度排序：基于语义匹配度的候选排序};
+  \node[module, below=of m2] (m3) {%
+    \textbf{模块三：演化补丁的语义等价判定}（在线，核心创新）\\
+    干预点识别：定位补丁实际修改的二进制指令\\
+    修复意图比对：判断干预是否实现"修复意图"（而非形式匹配）\\
+    不变式检查：验证修复后是否满足语义不变式};
+  \draw[arr] (m1) -- (m2);
+  \draw[arr] (m2) -- (m3);
+\end{tikzpicture}
+\caption{基于智能体的漏洞修复验证技术路线}
+\label{fig:verify-route}
+\end{figure}
+
+\begin{itemize}
+  \item \textbf{模块一：漏洞语义先验提取}。离线阶段利用智能体从 CVE 描述、补丁 diff 与源码上下文中提取漏洞语义五元组，作为统一语义先验，替代现有方法仅依赖原始补丁 diff 的浅层表示。
+  \item \textbf{模块二：语义引导的补丁定位}。在线阶段采用"粗—细"两阶段定位：先用传统启发式（字符串、常量、导入表）快速缩小候选函数集，再将五元组作为约束注入智能体推理，引导其在候选函数中进行语义切片与置信度排序，输出 Top-K 补丁候选区域。
+  \item \textbf{模块三：演化补丁的语义等价判定}。针对同一漏洞可能存在多种实现形式的修复（重构、拆分、合并等），不再追求"形式上的补丁匹配"，而是让智能体判断目标二进制中的干预点是否\textbf{实现了与原始补丁相同的修复意图}，并通过语义不变式进行交叉验证。
+\end{itemize}
+
+\textbf{可行性分析}：（1）数据基础充分：已构建 561 CVE 高保真基准与 12 组智能体配置的运行日志~\cite{zhang2026pptempirical,zhang2026agenticppt}，包含大量补丁定位与演化补丁的成功/失败案例，可直接用于方法设计与消融验证；（2）技术路线有实证支撑：前期工作已证明"丰富补丁元数据提升 DSR"与"补丁定位是主要瓶颈"两个关键结论，本方案是这两个结论的直接延伸，技术风险低；（3）工具链成熟：智能体框架（Codex / MiniSWEAgent）、二进制分析工具（binutils / Ghidra）与评估基准均已就绪，可快速进入实验迭代。
+
+\textbf{实验方案}：基准沿用前期 561-CVE Source-Built Benchmark + Patch Evolution Set + Ubuntu Packages Set；对比方法包括 Codex 原始配置、Lares~\cite{lares}、PPTSP~\cite{pptsp}、PS\textsuperscript{3}~\cite{ps3}、BinXray~\cite{binxray}；评估指标包括 DSR、Accuracy、补丁定位准确率、每例 token 成本与时延；消融实验分别验证三个模块的独立贡献。预期全配置 DSR $\geq$ 0.98，演化补丁子集 DSR 提升 $\geq$ 15\%，成本增加 $\leq$ 10\%；进一步将验证能力对偶迁移至修复场景，在 RRBench 生成补丁上验证修复正确性判定的有效性。
 
 \subsection{实验方案设计}
 
@@ -149,7 +149,7 @@
 
 \begin{enumerate}
   \item \textbf{输入}：一批含已知漏洞的 IoT 固件镜像（部分为真实 CVE，部分为人工植入）。
-  \item \textbf{流程}：内容二挖掘未知语义漏洞，产出根因与 PoC；内容一对固件进行 PPT，判定已知 CVE 修复状态；内容三对确认的漏洞进行自动修复，产出补丁；内容一再次对修复后固件进行 PPT 式验证，判定修复有效性。
+  \item \textbf{流程}：内容一挖掘未知语义漏洞，产出根因与 PoC；内容二对确认的漏洞进行自动修复，产出候选补丁；内容三对修复后固件进行 PPT 式修复验证，判定补丁是否真正消除漏洞根因；同时内容三对固件中已知 CVE 的修复状态进行补丁存在性核查，覆盖供应链审计场景。
   \item \textbf{评估}：闭环整体准确率、各环节能力复用带来的效率提升、相比独立运行的性能差异。
 \end{enumerate}
 
@@ -164,9 +164,9 @@
     \toprule
     \textbf{基准} & \textbf{状态} & \textbf{规模} & \textbf{用途} \\
     \midrule
-    561-CVE PPT 基准 & 已建成 & 561 CVE / 10 项目 & 内容一 \\
-    语义漏洞固件基准 & 拟建设 & 10--15 真实固件 + 50 合成案例 & 内容二 \\
-    RRBench & 已建成（课题组） & 115 案例 / 95 仓库 & 内容三 \\
+    561-CVE PPT 基准 & 已建成 & 561 CVE / 10 项目 & 内容三 \\
+    语义漏洞固件基准 & 拟建设 & 10--15 真实固件 + 50 合成案例 & 内容一 \\
+    RRBench & 已建成（课题组） & 115 案例 / 95 仓库 & 内容二 \\
     端到端闭环基准 & 拟整合 & 复用上述 + 新增修复验证 & 闭环验证 \\
     \bottomrule
   \end{tabular}
@@ -183,9 +183,9 @@
     \toprule
     \textbf{风险} & \textbf{影响} & \textbf{应对策略} \\
     \midrule
-    语义 oracle 自动构造准确率不足 & 内容二假阳性率高 & 引入人工审核接口；采用多智能体交叉验证 \\
-    自因变量建模在复杂固件上扩展性差 & 内容二覆盖率不达预期 & 从中小型固件起步逐步扩展；结合动态污点辅助识别 \\
-    修复验证的私有规约生成不完整 & 内容三私有拒绝率下降有限 & 结合官方补丁对比学习；引入形式化方法辅助规约补全 \\
+    语义 oracle 自动构造准确率不足 & 内容一假阳性率高 & 引入人工审核接口；采用多智能体交叉验证 \\
+    自因变量建模在复杂固件上扩展性差 & 内容一覆盖率不达预期 & 从中小型固件起步逐步扩展；结合动态污点辅助识别 \\
+    修复验证的私有规约生成不完整 & 内容二私有拒绝率下降有限 & 结合官方补丁对比学习；引入形式化方法辅助规约补全 \\
     智能体推理成本过高 & 方法难以规模化 & 分级模型策略（轻量粗筛 + 重量精判）；缓存中间语义表示 \\
     \bottomrule
   \end{tabular}
