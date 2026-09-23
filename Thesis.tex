@@ -1,0 +1,68 @@
+%---------------------------------------------------------------------------%
+%-                          国科大开题报告 LaTeX 工程                         -%
+%-                   基于 ucasproposal 模板 (mohuangrui/ucasproposal)         -%
+%---------------------------------------------------------------------------%
+%->> Document class declaration
+%---------------------------------------------------------------------------%
+\documentclass{Style/ucasproposal}%
+%- 可选参数:
+%- [<oneside|twoside|print>]% 单面打印/双面打印/纸质打印
+%- [fontset=<adobe|none|...>]% 指定字体集，默认自动检测
+%- [scheme=plain]% 留学生英文模式
+%---------------------------------------------------------------------------%
+%->> Document settings
+%---------------------------------------------------------------------------%
+\usepackage[bibtex,numbers,xhf,tikz]{Style/artratex}% 数字引用[1]+无页眉页脚
+%- [bibtex|biber]% 参考文献处理引擎
+%- [numbers|super|authoryear|alpha]% 引用样式，numbers=数字上标式
+%- [xhf]% 关闭页眉页脚
+%- [list]% 代码与算法列表环境
+%- [tikz]% TikZ 绘图
+\usepackage{Style/artracom}% 用户自定义命令
+%-
+%->> 用户自定义设置（请在下方添加，勿修改模板文件）
+%---------------------------------------------------------------------------%
+\usepackage{booktabs}% 三线表（自因变量表、基准计划表等）
+\usetikzlibrary{arrows.meta,fit,backgrounds}% 技术路线图所需 TikZ 库
+%- TikZ 样式定义（技术路线图源节点样式）
+\tikzset{
+  module/.style={draw, rounded corners=2pt, align=left, text width=13cm, inner sep=6pt, font=\small},
+  smallbox/.style={draw, rounded corners=2pt, align=center, inner sep=6pt, font=\small},
+  arr/.style={-{Stealth[length=2.5mm]}, thick},
+  darr/.style={-{Stealth[length=2.5mm]}, thick, dashed},
+  layerbox/.style={draw, densely dashed, inner sep=8pt},
+  layerlabel/.style={font=\small\bfseries},
+}
+%---------------------------------------------------------------------------%
+%->> Document inclusion
+%---------------------------------------------------------------------------%
+%\includeonly{Tex/01-background,Tex/02-related}% 选择性编译
+%---------------------------------------------------------------------------%
+%->> Document content
+%---------------------------------------------------------------------------%
+%-
+%-> 封面信息
+%-
+\input{Tex/Frontinfo}%
+\begin{document}
+%-
+%-> 前置部分：封面、目录
+%-
+\pagenumbering{roman}% 罗马页码
+\input{Tex/Frontmatter}% 封面 + 目录
+%-
+%-> 主体部分
+%-
+\clearpage
+\pagenumbering{arabic}% 阿拉伯页码
+\input{Tex/Mainmatter}% 正文章节
+%-
+%-> 后置部分：参考文献
+%-
+\artxifstreq{\artxbib}{bibtex}{% 使用 bibtex
+    \bibliography{Biblio/ref}%
+}{%
+    \printbibliography%
+}
+\end{document}
+%---------------------------------------------------------------------------%
