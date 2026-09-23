@@ -15,7 +15,7 @@ proposal_ucas/
 │   ├── artratex.sty
 │   └── artracom.sty      # 化学宏包已注释（本课题不需要）
 ├── Biblio/
-│   ├── ref.bib           # 参考文献（63 条）
+│   ├── ref.bib           # 参考文献（89 条）
 │   └── gbt7714-numerical.bst  # GB/T 7714 数字格式
 ├── Img/
 │   └── ucas_logo.pdf     # 校徽
@@ -47,4 +47,4 @@ xelatex Thesis && bibtex Thesis && xelatex Thesis && xelatex Thesis
 
 1. ~~填写 `Tex/Frontinfo.tex`~~（已完成：张小北 / 202518018629028 / 侯锐 研究员 / 计算机系统结构）。
 2. **文献核实**：`Biblio/ref.bib` 中标注 `% TODO-VERIFY` 的条目（SyzTrust、Ember-IO、Firmvenom、CONFU、Operation Mango、FIRE、OctopusTaint、UVScan、FirmPilot、CVE-Bench、SEC-bench、RUSPATCH、AkiraRust 等）的 venue/年份为最佳推测，投稿/答辩前务必逐条核对。
-3. **已核实条目**：2.3 节（漏洞修复验证）全部 24 篇（源自《PPT的发展现状和综述》文献表）、FirmAgent（NDSS 2026）、LATTE（arXiv:2310.08275）、BinReX（USENIX Security 2026）、本人 ISSTA 2026 empirical 论文。
+3. **已核实条目**：2.3 节（漏洞修复验证）全部 24 篇（源自《PPT的发展现状和综述》文献表）、2.2 节全部 32 篇（源自《2.3-基于智能体的漏洞自动修复-深化修订版.md》，含 Kumushi/PVBench/PatchBench 等 2026 年新工作）、FirmAgent（NDSS 2026）、LATTE（arXiv:2310.08275）、BinReX（USENIX Security 2026）、本人 ISSTA 2026 empirical 论文。

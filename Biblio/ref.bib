@@ -481,36 +481,38 @@
   note      = {TODO: 核对标题/venue/作者},
 }
 
-% TODO-VERIFY
-@misc{secbench,
-  author    = {Anonymous},
-  title     = {{SEC-bench}: Automated Benchmarking of {LLM} Agents on Real-World Software Security Tasks},
+@inproceedings{secbench,
+  author    = {Lee, H. and Zhang, Z. and Lu, H. and others},
+  title     = {{SEC}-bench: Automated Benchmarking of {LLM} Agents on Real-World Software Security Tasks},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {38},
   year      = {2025},
-  note      = {TODO: 核对标题/venue/作者},
+  note      = {arXiv:2506.11791},
 }
 
-% TODO-VERIFY
-@misc{ruspatch,
-  author    = {Anonymous},
-  title     = {{RUSPATCH}: Dynamic Patching for {Rust}},
-  year      = {2024},
-  note      = {TODO: 核对标题/venue/作者},
+@inproceedings{ruspatch,
+  author    = {Wu, Y. and Hua, B.},
+  title     = {{RUSPATCH}: Towards Timely and Effectively Patching {Rust} Applications},
+  booktitle = {2023 IEEE 23rd International Conference on Software Quality, Reliability, and Security},
+  pages     = {517--528},
+  year      = {2023},
 }
 
-% TODO-VERIFY
 @misc{akirarust,
-  author    = {Anonymous},
-  title     = {{AkiraRust}: Semantic Repair of Undefined Behavior in {Rust}},
-  year      = {2025},
-  note      = {TODO: 核对标题/venue/作者},
+  author = {Jiang, R. and Wang, Y. and Dong, P. and others},
+  title  = {{AkiraRust}: Re-thinking {LLM}-aided {Rust} Repair Using a Feedback-guided Thinking Switch},
+  year   = {2026},
+  doi    = {10.48550/arXiv.2602.21681},
+  note   = {arXiv:2602.21681},
 }
 
 @inproceedings{repairagent,
   author    = {Bouzenia, Islem and Devanbu, Premkumar and Pradel, Michael},
   title     = {{RepairAgent}: An Autonomous, {LLM}-Based Agent for Program Repair},
-  booktitle = {Proceedings of the IEEE/ACM 47th International Conference on Software Engineering},
+  booktitle = {2025 IEEE/ACM 47th International Conference on Software Engineering},
+  pages     = {2188--2200},
   year      = {2025},
-  note      = {TODO-VERIFY: 核对 venue 与页码},
+  doi       = {10.1109/ICSE55347.2025.00157},
 }
 
 @misc{openhands,
@@ -551,4 +553,218 @@
   title     = {Towards Generality: Task-Adaptive Binary Analysis via Semantic Retrieval and Verifiable Reasoning},
   booktitle = {35th USENIX Security Symposium},
   year      = {2026},
+}
+
+% ---------- 2.2 漏洞自动修复深化修订版新增（源自《2.3-基于智能体的漏洞自动修复-深化修订版.md》，[1]-[32]） ----------
+
+@inproceedings{smith2015cure,
+  author    = {Smith, E. K. and Barr, E. T. and Le Goues, C. and Brun, Y.},
+  title     = {Is the Cure Worse Than the Disease? Overfitting in Automated Program Repair},
+  booktitle = {Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering},
+  pages     = {532--543},
+  year      = {2015},
+  doi       = {10.1145/2786805.2786825},
+}
+
+@article{jung2018rustbelt,
+  author  = {Jung, R. and Jourdan, J.-H. and Krebbers, R. and others},
+  title   = {{RustBelt}: Securing the Foundations of the {Rust} Programming Language},
+  journal = {Proceedings of the ACM on Programming Languages},
+  volume  = {2},
+  number  = {POPL},
+  pages   = {1--34},
+  year    = {2018},
+  doi     = {10.1145/3158154},
+}
+
+@inproceedings{qin2020rust,
+  author    = {Qin, B. and Chen, Y. and Yu, Z. and others},
+  title     = {Understanding Memory and Thread Safety Practices and Issues in Real-World {Rust} Programs},
+  booktitle = {Proceedings of the 41st ACM SIGPLAN Conference on Programming Language Design and Implementation},
+  pages     = {763--779},
+  year      = {2020},
+  doi       = {10.1145/3385412.3386036},
+}
+
+@inproceedings{nguyen2013semfix,
+  author    = {Nguyen, H. D. T. and Qi, D. and Roychoudhury, A. and others},
+  title     = {{SemFix}: Program Repair via Semantic Analysis},
+  booktitle = {2013 35th International Conference on Software Engineering},
+  pages     = {772--781},
+  year      = {2013},
+  doi       = {10.1109/ICSE.2013.6606623},
+}
+
+@article{gao2021extractfix,
+  author  = {Gao, X. and Wang, B. and Duck, G. J. and others},
+  title   = {Beyond Tests: Program Vulnerability Repair via Crash Constraint Extraction},
+  journal = {ACM Transactions on Software Engineering and Methodology},
+  volume  = {30},
+  number  = {2},
+  pages   = {1--27},
+  year    = {2021},
+  doi     = {10.1145/3418461},
+}
+
+@inproceedings{zhang2022vulnfix,
+  author    = {Zhang, Y. and Gao, X. and Duck, G. J. and others},
+  title     = {Program Vulnerability Repair via Inductive Inference},
+  booktitle = {Proceedings of the 31st ACM SIGSOFT International Symposium on Software Testing and Analysis},
+  pages     = {691--702},
+  year      = {2022},
+  doi       = {10.1145/3533767.3534387},
+}
+
+@inproceedings{fu2022vulrepair,
+  author    = {Fu, M. and Tantithamthavorn, C. and Le, T. and others},
+  title     = {{VulRepair}: A {T5}-Based Automated Software Vulnerability Repair},
+  booktitle = {Proceedings of the 30th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering},
+  pages     = {935--947},
+  year      = {2022},
+  doi       = {10.1145/3540250.3549098},
+}
+
+@inproceedings{zhou2024vulmaster,
+  author    = {Zhou, X. and Kim, K. and Xu, B. and others},
+  title     = {Out of Sight, Out of Mind: Better Automatic Vulnerability Repair by Broadening Input Ranges and Sources},
+  booktitle = {Proceedings of the IEEE/ACM 46th International Conference on Software Engineering},
+  pages     = {1--13},
+  year      = {2024},
+  doi       = {10.1145/3597503.3639222},
+}
+
+@inproceedings{pearce2023zeroshot,
+  author    = {Pearce, H. and Tan, B. and Ahmad, B. and others},
+  title     = {Examining Zero-Shot Vulnerability Repair with Large Language Models},
+  booktitle = {2023 IEEE Symposium on Security and Privacy},
+  pages     = {2339--2356},
+  year      = {2023},
+  doi       = {10.1109/SP46215.2023.10179420},
+}
+
+@inproceedings{wen2025vulr2,
+  author    = {Wen, X. C. and Lin, Z. and Yang, Y. and others},
+  title     = {{Vul-R2}: A Reasoning {LLM} for Automated Vulnerability Repair},
+  booktitle = {2025 40th IEEE/ACM International Conference on Automated Software Engineering},
+  pages     = {26--38},
+  year      = {2025},
+  doi       = {10.1109/ASE63991.2025.00011},
+}
+
+@inproceedings{nong2025appatch,
+  author    = {Nong, Y. and Yang, H. and Cheng, L. and others},
+  title     = {{APPATCH}: Automated Adaptive Prompting Large Language Models for Real-World Software Vulnerability Patching},
+  booktitle = {34th USENIX Security Symposium},
+  pages     = {4481--4500},
+  year      = {2025},
+}
+
+@inproceedings{li2024interpvd,
+  author    = {Li, Z. and Wang, N. and Zou, D. and others},
+  title     = {On the Effectiveness of Function-Level Vulnerability Detectors for Inter-Procedural Vulnerabilities},
+  booktitle = {Proceedings of the IEEE/ACM 46th International Conference on Software Engineering},
+  pages     = {1--12},
+  year      = {2024},
+  doi       = {10.1145/3597503.3639218},
+}
+
+@misc{wang2026kumushi,
+  author = {Wang, H. and Basque, Z. L. and Hu, J. and others},
+  title  = {Root-Cause-Driven Automated Vulnerability Repair},
+  year   = {2026},
+  doi    = {10.48550/arXiv.2605.04251},
+  note   = {arXiv:2605.04251},
+}
+
+@inproceedings{bui2022vul4j,
+  author    = {Bui, Q. C. and Scandariato, R. and D{\'i}az Ferreyra, N. E.},
+  title     = {{Vul4J}: A Dataset of Reproducible {Java} Vulnerabilities Geared Towards the Study of Program Repair Techniques},
+  booktitle = {Proceedings of the 19th International Conference on Mining Software Repositories},
+  pages     = {464--468},
+  year      = {2022},
+  doi       = {10.1145/3524842.3528482},
+}
+
+@inproceedings{wu2023vjbench,
+  author    = {Wu, Y. and Jiang, N. and Pham, H. V. and others},
+  title     = {How Effective Are Neural Networks for Fixing Security Vulnerabilities},
+  booktitle = {Proceedings of the 32nd ACM SIGSOFT International Symposium on Software Testing and Analysis},
+  pages     = {1282--1294},
+  year      = {2023},
+  doi       = {10.1145/3597926.3598135},
+}
+
+@inproceedings{yang2017opad,
+  author    = {Yang, J. and Zhikhartsev, A. and Liu, Y. and others},
+  title     = {Better Test Cases for Better Automated Program Repair},
+  booktitle = {Proceedings of the 2017 11th Joint Meeting on Foundations of Software Engineering},
+  pages     = {831--841},
+  year      = {2017},
+  doi       = {10.1145/3106237.3106274},
+}
+
+@misc{yu2026pvbench,
+  author = {Yu, Z. and Shi, W. and Sun, X. and others},
+  title  = {Patch Validation in Automated Vulnerability Repair},
+  year   = {2026},
+  doi    = {10.48550/arXiv.2603.06858},
+  note   = {arXiv:2603.06858},
+}
+
+@misc{shen2026patchbench,
+  author = {Shen, C. and Li, J. and Mahajan, A. and others},
+  title  = {{PatchBench}: Evaluating {AI} Agents for Vulnerability Patching},
+  year   = {2026},
+  doi    = {10.48550/arXiv.2609.04075},
+  note   = {arXiv:2609.04075},
+}
+
+@inproceedings{deligiannis2025rustassistant,
+  author    = {Deligiannis, P. and Lal, A. and Mehrotra, N. and others},
+  title     = {{RustAssistant}: Using {LLMs} to Fix Compilation Errors in {Rust} Code},
+  booktitle = {2025 IEEE/ACM 47th International Conference on Software Engineering},
+  pages     = {3097--3109},
+  year      = {2025},
+}
+
+@inproceedings{hua2021rupair,
+  author    = {Hua, B. and Ouyang, W. and Jiang, C. and others},
+  title     = {Rupair: Towards Automatic Buffer Overflow Detection and Rectification for {Rust}},
+  booktitle = {Proceedings of the 37th Annual Computer Security Applications Conference},
+  pages     = {812--823},
+  year      = {2021},
+  doi       = {10.1145/3485832.3485841},
+}
+
+@inproceedings{xiang2026rustswebench,
+  author    = {Xiang, J. and He, W. and Wang, X. and others},
+  title     = {Evaluating and Improving Automated Repository-Level {Rust} Issue Resolution with {LLM}-Based Agents},
+  booktitle = {Proceedings of the 48th International Conference on Software Engineering},
+  pages     = {805--817},
+  year      = {2026},
+  doi       = {10.1145/3744916.3773108},
+}
+
+@misc{miri,
+  author       = {{The Rust Project}},
+  title        = {Miri: An Interpreter for {Rust}'s Mid-Level Intermediate Representation},
+  howpublished = {\url{https://github.com/rust-lang/miri}},
+  year         = {2026},
+  note         = {Accessed: 2026-09-23},
+}
+
+@misc{loomtool,
+  author       = {{Tokio Project}},
+  title        = {Loom: Concurrency Permutation Testing for {Rust}},
+  howpublished = {\url{https://docs.rs/loom/latest/loom/}},
+  year         = {2026},
+  note         = {Accessed: 2026-09-23},
+}
+
+@misc{rustref,
+  author       = {{The Rust Project}},
+  title        = {The {Rust} Reference: Behavior Considered Undefined},
+  howpublished = {\url{https://doc.rust-lang.org/reference/behavior-considered-undefined.html}},
+  year         = {2026},
+  note         = {Accessed: 2026-09-23},
 }
