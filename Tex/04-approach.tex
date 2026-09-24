@@ -1,10 +1,10 @@
 \section{拟采用的研究方法、技术路线、实验方案及其可行性分析}
 
-\subsection{基于智能体的语义漏洞挖掘方法}
+\subsection{基于智能体的漏洞挖掘方法}
 
 \textbf{拟解决的关键问题}：语义/逻辑漏洞（认证绕过、状态机错误、配置驱动缺陷）自动化挖掘的两大瓶颈——\textbf{自因变量难以统一建模}与\textbf{语义 oracle 难以自动构造}。自因变量——那些不受外部输入直接控制、由内部状态、配置、时序与外设决定的变量——在文献中以 state-driven、config-driven、timing-driven、peripheral-driven 等不同形态各自为战，缺乏统一抽象；同时，语义漏洞的判定依赖人工构造的策略与规约，Firmalice 的认证绕过 oracle 使用十年仍是孤例~\cite{firmalice}，oracle 的缺失使自动化检测难以规模化。
 
-\textbf{技术方案}：针对上述问题，本文提出\textbf{自因变量感知的多智能体语义漏洞挖掘框架}，整体技术路线如图~\ref{fig:mining-route} 所示，包含四个核心模块：
+\textbf{技术方案}：针对上述问题，本文提出\textbf{自因变量感知的多智能体漏洞挖掘框架}，整体技术路线如图~\ref{fig:mining-route} 所示，包含四个核心模块：
 
 \begin{figure}[htbp]
 \centering
@@ -29,13 +29,13 @@
   \draw[arr] (m2) -- (m3);
   \draw[arr] (m3) -- (m4);
 \end{tikzpicture}
-\caption{基于智能体的语义漏洞挖掘技术路线}
+\caption{基于智能体的漏洞挖掘技术路线}
 \label{fig:mining-route}
 \end{figure}
 
 \begin{itemize}
   \item \textbf{模块一：自因变量统一建模}。综合静态分析与智能体推理，在固件二进制上识别各类自因变量，并统一表示为标注来源类型、取值空间与影响路径的自因变量格，使后续 fuzzing 能够将自因变量作为一等探索维度。
-  \item \textbf{模块二：语义 oracle 自动构造}。利用智能体从自然语言文档（协议 RFC、芯片数据手册、配置说明）中自动提取安全不变式，并将其编译为可执行的运行时监测点与断言，解决语义漏洞挖掘中"oracle 靠人工"的长期瓶颈。
+  \item \textbf{模块二：语义 oracle 自动构造}。利用智能体从自然语言文档（协议 RFC、芯片数据手册、配置说明）中自动提取安全不变式，并将其编译为可执行的运行时监测点与断言，解决漏洞挖掘中"oracle 靠人工"的长期瓶颈。
   \item \textbf{模块三：自因变量感知的智能体 fuzzing}。采用规划—执行—验证三智能体协同架构：规划智能体根据覆盖率与不变式反馈规划探索策略；执行智能体在生成输入的同时，主动翻转目标自因变量；验证智能体检查不变式违背。该模块突破传统 fuzzing 仅在输入空间探索的局限。
   \item \textbf{模块四：漏洞确认与根因定位}。对验证智能体报告的候选漏洞，自动生成 PoC，通过动态切片定位根因，并提供人工审核接口。
 \end{itemize}
