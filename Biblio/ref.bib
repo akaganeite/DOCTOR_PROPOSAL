@@ -246,22 +246,6 @@
   year      = {2015},
 }
 
-@inproceedings{fie,
-  author    = {Davidson, Drew and Moench, Benjamin and Ristenpart, Thomas and Jha, Somesh},
-  title     = {{FIE} on Firmware: Finding Vulnerabilities in Embedded Systems Using Symbolic Execution},
-  booktitle = {22nd USENIX Security Symposium},
-  pages     = {463--478},
-  year      = {2013},
-}
-
-@inproceedings{karonte,
-  author    = {Redini, Nilo and Machiry, Aravind and Wang, Ruoyu and others},
-  title     = {{Karonte}: Detecting Insecure Multi-binary Interactions in Embedded Firmware},
-  booktitle = {2020 IEEE Symposium on Security and Privacy},
-  pages     = {1544--1561},
-  year      = {2020},
-}
-
 @inproceedings{firmafl,
   author    = {Zheng, Yaowen and Davanian, Ali and Yin, Heng and others},
   title     = {{FIRM-AFL}: High-Throughput Greybox Fuzzing of {IoT} Firmware via Augmented Process Emulation},
@@ -279,13 +263,6 @@
 }
 
 % TODO-VERIFY: venue (ACSAC 2020?)
-@inproceedings{laelaps,
-  author    = {Cao, Chen and Guan, Le and Ming, Jiang and Liu, Peng},
-  title     = {Device-Agnostic Firmware Execution is Possible: A Concolic Execution Approach for Peripheral Emulation},
-  booktitle = {Annual Computer Security Applications Conference (ACSAC)},
-  year      = {2020},
-}
-
 @inproceedings{fuzzware,
   author    = {Scharnowski, Tobias and Bars, Nils and Schloegel, Moritz and others},
   title     = {{Fuzzware}: Using Precise {MMIO} Modeling for Effective Firmware Fuzzing},
@@ -318,73 +295,6 @@
 }
 
 % TODO-VERIFY
-@misc{operationmango,
-  author    = {Wu, Mingsen and others},
-  title     = {Operation Mango: Scalable Discovery of Taint-Style Vulnerabilities in Binary Firmware Services},
-  booktitle = {33rd USENIX Security Symposium},
-  year      = {2024},
-}
-
-% TODO-VERIFY
-@misc{fire,
-  author    = {Anonymous},
-  title     = {{FIRE}: Combinating Refuzzing with {IoT} Firmware},
-  booktitle = {33rd USENIX Security Symposium},
-  year      = {2024},
-  note      = {TODO: 核对标题与作者},
-}
-
-% TODO-VERIFY
-@misc{octopustaint,
-  author    = {Anonymous},
-  title     = {{OctopusTaint}: Scalable Cross-Binary Taint Analysis for Firmware},
-  booktitle = {Proceedings of the 2024 ACM SIGSAC Conference on Computer and Communications Security},
-  year      = {2024},
-  note      = {TODO: 核对标题与作者},
-}
-
-% TODO-VERIFY
-@misc{uvscan,
-  author    = {Anonymous},
-  title     = {{UVScan}: Detecting Third-Party Component Usage Violations in {IoT} Firmware},
-  booktitle = {32nd USENIX Security Symposium},
-  year      = {2023},
-  note      = {TODO: 核对标题与作者},
-}
-
-% TODO-VERIFY
-@misc{emberio,
-  author    = {Anonymous},
-  title     = {{Ember-IO}: Effective Firmware Fuzzing with Realistic Peripheral Interrupts},
-  year      = {2023},
-  note      = {TODO: 核对标题/venue/作者},
-}
-
-% TODO-VERIFY
-@misc{firmvenom,
-  author    = {Anonymous},
-  title     = {{Firmvenom}: Peripheral-Semantics-Aware Firmware Fuzzing},
-  year      = {2024},
-  note      = {TODO: 核对标题/venue/作者},
-}
-
-% TODO-VERIFY
-@misc{confu,
-  author    = {Anonymous},
-  title     = {{CONFU}: Configuration Fuzzing for Software},
-  year      = {2023},
-  note      = {TODO: 核对标题/venue/作者},
-}
-
-% TODO-VERIFY
-@misc{firmhybridfuzz,
-  author    = {Anonymous},
-  title     = {{FirmHybridFuzz}: Hybrid Fuzzing for {IoT} Firmware},
-  year      = {2023},
-  note      = {TODO: 核对标题/venue/作者},
-}
-
-% 已核对: tmp/pdfs/FirmAgent-NDSS-2026.pdf
 @inproceedings{firmagent,
   author    = {Ji, Jiangan and Zhang, Chao and Gan, Shuitao and Lin, Jian and Liu, Hangtian and Liu, Tieming and Zheng, Lei and Jia, Zhipeng},
   title     = {{FirmAgent}: Leveraging Fuzzing to Assist {LLM} Agents with {IoT} Firmware Vulnerability Discovery},
@@ -394,13 +304,6 @@
 }
 
 % TODO-VERIFY
-@misc{firmpilot,
-  author    = {Anonymous},
-  title     = {{FirmPilot}: Multi-Agent Firmware Rehosting with {LLM}},
-  year      = {2025},
-  note      = {TODO: 核对标题/venue/作者},
-}
-
 @inproceedings{chatafl,
   author    = {Meng, Ruijie and Mirchev, Martin and B{\"o}hme, Marcel and Roychoudhury, Abhik},
   title     = {Large Language Model Guided Protocol Fuzzing},
@@ -409,13 +312,6 @@
 }
 
 % 已核对: tmp/pdfs/LATTE.pdf
-@article{latte,
-  author  = {Liu, Puzhuo and Sun, Chengnian and Zheng, Yaowen and Feng, Xuan and Qin, Chuan and Wang, Yuncheng and Xu, Zhenyang and Li, Zhi and Di, Peng and Jiang, Yu and Sun, Limin},
-  title   = {Harnessing the Power of {LLM} to Support Binary Taint Analysis},
-  journal = {arXiv preprint arXiv:2310.08275},
-  year    = {2025},
-}
-
 @misc{bigsleep,
   author       = {{Google Project Zero and DeepMind}},
   title        = {From Naptime to Big Sleep: Using Large Language Models to Catch Vulnerabilities in Real-World Code},
@@ -440,30 +336,6 @@
   number  = {1},
   pages   = {54--72},
   year    = {2012},
-}
-
-@inproceedings{spr,
-  author    = {Long, Fan and Rinard, Martin},
-  title     = {Staged Program Repair with Condition Synthesis},
-  booktitle = {Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering},
-  pages     = {166--178},
-  year      = {2015},
-}
-
-@inproceedings{prophet,
-  author    = {Long, Fan and Rinard, Martin},
-  title     = {Automatic Patch Generation by Learning Correct Code},
-  booktitle = {Proceedings of the 43rd Annual ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages},
-  pages     = {298--312},
-  year      = {2016},
-}
-
-@inproceedings{capgen,
-  author    = {Wen, Ming and Chen, Junjie and Wu, Rongxin and others},
-  title     = {Context-Aware Patch Generation for Better Automated Program Repair},
-  booktitle = {Proceedings of the 40th International Conference on Software Engineering},
-  pages     = {1--11},
-  year      = {2018},
 }
 
 @inproceedings{swebench,
@@ -531,15 +403,6 @@
 }
 
 % TODO-VERIFY
-@misc{rustforger,
-  author    = {Anonymous},
-  title     = {{RustForger}: {Rust}-Specific Vulnerability Repair with Dynamic Execution Traces},
-  year      = {2025},
-  note      = {TODO: 核对标题/venue/作者},
-}
-
-% ---------- 通用 ----------
-
 @misc{log4j,
   author       = {{Apache Software Foundation}},
   title        = {{Apache} {Log4j} {CVE}-2021-44228},

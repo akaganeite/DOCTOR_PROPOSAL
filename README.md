@@ -15,7 +15,7 @@ proposal_ucas/
 │   ├── artratex.sty
 │   └── artracom.sty      # 化学宏包已注释（本课题不需要）
 ├── Biblio/
-│   ├── ref.bib           # 参考文献（109 条）
+│   ├── ref.bib           # 参考文献（92 条，与正文引用一致）
 │   └── gbt7714-numerical.bst  # GB/T 7714 数字格式
 ├── Img/
 │   └── ucas_logo.pdf     # 校徽
@@ -46,5 +46,5 @@ xelatex Thesis && bibtex Thesis && xelatex Thesis && xelatex Thesis
 ## 待办
 
 1. ~~填写 `Tex/Frontinfo.tex`~~（已完成：张小北 / 202518018629028 / 侯锐 研究员 / 计算机系统结构）。
-2. **文献核实**：`Biblio/ref.bib` 中标注 `% TODO-VERIFY` 的条目（SyzTrust、Ember-IO、Firmvenom、CONFU、Operation Mango、FIRE、OctopusTaint、UVScan、FirmPilot、CVE-Bench、SEC-bench、RUSPATCH、AkiraRust 等）的 venue/年份为最佳推测，投稿/答辩前务必逐条核对。
+2. **文献核实**：`Biblio/ref.bib` 中标注 `% TODO-VERIFY` 的条目（P2IM、StateAFL、SyzTrust、FirmAgent、SWE-bench、OpenHands、RRBench、mozillafirefox150）的 venue/年份为最佳推测，投稿/答辩前务必逐条核对。旧版 2.1/2.2 遗留的 17 条未引用文献（FIE、Karonte、Laelaps、FirmVenom、CONFU、Operation Mango、FIRE、OctopusTaint、UVScan、Ember-IO、FirmHybridFuzz、FirmPilot、LATTE、SPR、Prophet、CapGen、RustForger）已清理，.bib 与正文引用一致（92 条）。
 3. **已核实条目**：2.3 节（漏洞修复验证）全部 24 篇（源自《PPT的发展现状和综述》文献表）、2.2 节全部 32 篇（源自《2.3-基于智能体的漏洞自动修复-深化修订版.md》，含 Kumushi/PVBench/PatchBench 等 2026 年新工作）、FirmAgent（NDSS 2026）、LATTE（arXiv:2310.08275）、BinReX（USENIX Security 2026）、2.1 节全部 28 篇（源自《2.1-基于智能体的语义漏洞挖掘-深化修订版.md》；PANGOLIN/FIRMENSTEIN/Bond=USENIX Sec 2026，Abacus=ASPLOS 2026，LISA=ISSRE 2026，TransFuzz=OOPSLA 2026，deepSURF=IEEE S&P 2026，InferROI=ICSE 2025，BSFuzzer/ProtocolGuard=NDSS 2026，TyPatch=arXiv:2609.13728；mozillafirefox150 缺报告链接、保留 TODO 注释）、本人 ISSTA 2026 empirical 论文。
