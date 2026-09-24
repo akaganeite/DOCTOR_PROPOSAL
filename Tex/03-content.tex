@@ -12,7 +12,7 @@
 \subsection{研究目标}
 \label{sec:research-objectives}
 
-漏洞治理不仅需要发现潜在的安全缺陷，还需要针对漏洞形成有效修复，并确认修复满足相应安全要求、进入实际部署程序。仅发现漏洞或生成补丁，尚不足以确认目标系统中的相应风险已经消除。因此，本课题围绕“发现问题—生成修复—确认修复”的研究主线，探索大模型语义理解、智能体推理与程序分析相结合的方法，提升漏洞治理关键环节的自动化水平与结果可靠性。总体研究框架如图~\ref{fig:framework}~所示。
+漏洞治理不仅需要发现潜在的安全缺陷，还需要针对漏洞形成有效修复，并确认修复满足相应安全要求、进入实际部署程序。仅发现漏洞或生成补丁，尚不足以确认目标系统中的相应风险已经消除。因此，本课题围绕“发现问题—生成修复—确认修复”的研究主线，探索大模型语义理解、智能体推理与程序分析相结合的方法，提升漏洞治理关键环节的自动化水平与结果可靠性。
 
 在漏洞挖掘环节，本课题重点关注嵌入式设备与剥离符号二进制场景中的协议状态违例、行为逻辑错误和资源泄漏等问题。此类问题的发现不仅需要触达相关执行路径，还需要判断程序行为是否违反协议、接口或资源生命周期要求。为此，拟研究受限信息条件下的行为约束恢复与针对性测试方法，将复杂交互中的状态变化与安全要求联系起来，提高对不易通过崩溃信号直接识别的漏洞的发现能力。
 
@@ -21,37 +21,6 @@
 在漏洞修复验证环节，补丁通过已知漏洞触发测试与功能测试，并不能充分说明漏洞根因已经消除\cite{rrbench}；同时，参考补丁的存在也不能直接证明实际部署的二进制包含对应修复\cite{zhang2026agenticppt}。为此，本课题拟从修复有效性与目标产物修复状态两个层面开展研究：一方面检查补丁是否满足漏洞相关安全要求并保持必要的合法行为，另一方面分析目标程序是否包含对应修复，提高对不完整修复、功能回归及修复缺失的识别能力。
 
 基于上述目标，本课题形成\textbf{基于智能体的漏洞挖掘、基于智能体的漏洞自动修复、基于智能体的漏洞修复验证}三个研究内容。三者分别面向漏洞发现、候选补丁生成与修复结果确认，在任务目标上逐步衔接，共同为从漏洞识别到修复确认提供方法与技术支撑。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=0.5cm]
-  % ---- 应用层 ----
-  \node[smallbox, text width=2.9cm] (c1) {\textbf{内容一}\\漏洞挖掘};
-  \node[smallbox, text width=2.9cm, right=1.1cm of c1] (c2) {\textbf{内容二}\\漏洞自动修复};
-  \node[smallbox, text width=2.9cm, right=1.1cm of c2] (c3) {\textbf{内容三}\\漏洞修复验证};
-  \draw[arr] (c1) -- node[above, font=\scriptsize]{PoC/根因} (c2);
-  \draw[arr] (c2) -- node[above, font=\scriptsize]{候选补丁} (c3);
-  \draw[darr] (c3.south) .. controls +(0,-0.55) and +(0,-0.55) .. node[below, font=\scriptsize]{安全规约反哺} (c1.south);
-  \begin{scope}[on background layer]
-    \node[layerbox, fit=(c1)(c2)(c3), label={[layerlabel]north west:应用层：漏洞攻防闭环}] (applayer) {};
-  \end{scope}
-  % ---- 方法层 ----
-  \node[module, below=0.9cm of applayer, align=center] (method) {%
-    \textbf{方法层：统一语义建模与智能体推理增强}\\
-    漏洞语义表示 \quad 补丁语义表示 \quad 修复语义表示 \quad 跨环节能力迁移};
-  % ---- 基础设施层 ----
-  \node[module, below=0.4cm of method, align=center] (infra) {%
-    \textbf{智能体基础设施层：Agent Harness 与工具链}\\
-    规划—执行—反思循环 \quad 工具调用接口 \quad 上下文与记忆管理\\
-    二进制分析（binutils/Ghidra）\quad 源码分析 \quad 模糊测试 \quad 符号执行};
-  % ---- 数据层 ----
-  \node[module, below=0.4cm of infra, align=center] (data) {%
-    \textbf{数据与基准层：评估基础设施}\\
-    语义漏洞基准（拟建）\quad RRBench~\cite{rrbench} \quad 561-CVE PPT 基准（已建）\cite{zhang2026pptempirical}};
-\end{tikzpicture}
-\caption{总体研究框架}
-\label{fig:framework}
-\end{figure}
 
 
 \subsection{研究内容一：基于智能体的漏洞挖掘方法}
