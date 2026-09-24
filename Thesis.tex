@@ -23,6 +23,8 @@
 %->> 用户自定义设置（请在下方添加，勿修改模板文件）
 %---------------------------------------------------------------------------%
 \usepackage{booktabs}% 三线表（自因变量表、基准计划表等）
+\usepackage{etoolbox}% 章节命令补丁
+\pretocmd{\section}{\clearpage}{}{}% 每个大章另起一页
 \usetikzlibrary{arrows.meta,fit,backgrounds}% 技术路线图所需 TikZ 库
 %- TikZ 样式定义（技术路线图源节点样式）
 \tikzset{
