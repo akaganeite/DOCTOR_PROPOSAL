@@ -18,6 +18,7 @@ proposal_ucas/
 │   ├── ref.bib           # 参考文献（96 条，正文引用 63 条）
 │   └── gbt7714-numerical.bst  # GB/T 7714 数字格式
 ├── Img/
+│   ├── 背景.png          # 第一章漏洞生命周期与治理流程图
 │   ├── 总览.png          # 第三章研究内容总览图
 │   ├── 漏洞挖掘.jpg      # 4.1 漏洞挖掘技术路线图
 │   └── ucas_logo.pdf     # 校徽
