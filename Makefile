@@ -7,12 +7,13 @@
 MAIN   = Thesis
 TEXSRC = $(shell find Tex Style -name '*.tex' 2>/dev/null) Thesis.tex
 BIBSRC = $(wildcard Biblio/*.bib)
+IMGSRC = $(shell find Img -type f 2>/dev/null)
 
 .PHONY: all clean cleanall
 
 all: $(MAIN).pdf
 
-$(MAIN).pdf: $(TEXSRC) $(BIBSRC) $(wildcard Style/*.cls Style/*.sty Style/*.cfg Style/*.bst)
+$(MAIN).pdf: $(TEXSRC) $(BIBSRC) $(IMGSRC) $(wildcard Style/*.cls Style/*.sty Style/*.cfg Style/*.bst)
 	xelatex -interaction=nonstopmode $(MAIN)
 	bibtex $(MAIN)
 	xelatex -interaction=nonstopmode $(MAIN)
